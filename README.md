@@ -16,4 +16,4 @@ The PDF is the October 2026, eight-page research manuscript. It is described as 
 
 ## Website
 
-A buildless static site served by GitHub Pages from the `main` branch. It uses no external JavaScript dependencies, trackers or backend services. The browser interactions switch language and result panels, and copy a citation. The illustrative workflow does not run model inference.
+A buildless static site served by GitHub Pages from the `main` branch, with four pages: overview, method, results and paper. It uses no external JavaScript dependencies, trackers or backend services. The browser interactions switch language (remembered across pages) and copy a citation. The illustrative workflow does not run model inference.

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Cyber-JEV evaluation results: overall ranking, a fixed review budget and patch sensitivity on C/C++ functions.">
+  <meta name="theme-color" content="#0b1618">
+  <link rel="canonical" href="https://ricardoz-kisara.github.io/cyber-jev/results.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b1618'/%3E%3Crect x='7' y='10' width='12' height='3' rx='1.5' fill='%23ec6a43'/%3E%3Crect x='7' y='19' width='18' height='3' rx='1.5' fill='%2350c897'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <title data-i18n="titleResults">Results · Cyber-JEV</title>
+  <script src="script.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="header">
+  <div class="header-inner">
+    <a class="wordmark" href="./" aria-label="Cyber-JEV home"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8"/><rect class="bm-del" x="8" y="10" width="11" height="3" rx="1.5"/><rect class="bm-add" x="8" y="19" width="16" height="3" rx="1.5"/></svg>Cyber-JEV</a>
+    <nav aria-label="Main navigation">
+      <a href="method.html" data-i18n="navMethod">Method</a><a href="results.html" aria-current="page" data-i18n="navResults">Results</a><a href="paper.html" data-i18n="navPaper">Paper</a>
+    </nav>
+    <button class="language" id="language" type="button" aria-label="Switch to Chinese"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="language-label">中文</span></button>
+  </div>
+</header>
+<main id="main">
+  <div class="page-band">
+    <div class="wrap page-head">
+      <p class="path">cyber-jev / <b>results</b></p>
+      <h1 class="page-title" data-i18n="resultsTitle">Measured in review decisions.</h1>
+      <p class="page-intro" data-i18n="resultsIntro">Offline evaluation on C/C++ functions. Reported Cyber-JEV results use the five-model ensemble unless stated otherwise.</p>
+    </div>
+  </div>
+  <div class="wrap page-end">
+  <section class="chapter" aria-labelledby="ranking-title">
+    <h2 class="chapter-title" id="ranking-title"><span class="chapter-no">1</span><span data-i18n="tabRanking">Overall ranking</span></h2>
+    <p class="chapter-intro" data-i18n="r1Text">How well each system ranks vulnerable functions above the rest, across 7,270 test functions.</p>
+    <div class="hunk"><span class="at">@@</span> − Jev 1.13 · + Cyber-JEV <span class="at">@@</span></div>
+    <div class="diff-panel">
+      <div class="dgroup"><h3 class="dgroup-title"><span>AUROC</span><em>+0.071</em></h3><div class="drow minus"><span class="sign">−</span><span class="val">0.743</span></div><div class="drow plus"><span class="sign">+</span><span class="val">0.814</span></div></div>
+      <div class="dgroup"><h3 class="dgroup-title"><span data-i18n="ap">Average precision</span><em>+0.096</em></h3><div class="drow minus"><span class="sign">−</span><span class="val">0.101</span></div><div class="drow plus"><span class="sign">+</span><span class="val">0.197</span></div></div>
+      <div class="dgroup"><h3 class="dgroup-title"><span data-i18n="lengthAuc">Length-stratified AUROC</span><em>+0.062</em></h3><div class="drow minus"><span class="sign">−</span><span class="val">0.706</span></div><div class="drow plus"><span class="sign">+</span><span class="val">0.768</span></div></div>
+    </div>
+    <p class="comment" data-i18n="rankingNote">Reference-only fine-tuning reaches 0.804 AUROC. The small aggregate difference from Cyber-JEV is not evidence of a conclusive AUROC advantage over that baseline; patch-pair behavior provides a separate comparison. These are results for the reported benchmark, not a universal ranking of tools.</p>
+  </section>
+
+  <section class="chapter" aria-labelledby="budget-title">
+    <h2 class="chapter-title" id="budget-title"><span class="chapter-no">2</span><span data-i18n="tabBudget">Fixed review budget</span></h2>
+    <p class="chapter-intro" data-i18n="r2Text">Both systems flag exactly 4,031 functions. How many of the 322 vulnerable functions does each one find?</p>
+    <div class="hunk"><span class="at">@@</span> <span data-i18n="cellsHunk">322 vulnerable functions · one cell each</span> <span class="at">@@</span></div>
+    <div class="cells-block">
+      <div class="cells-row minus"><div class="cells-label"><span class="sign">−</span>Jev 1.13</div><div class="cells" data-found="283" data-missed="39" aria-hidden="true"></div><p class="cells-count"><strong>39</strong> <span data-i18n="missedWord">missed</span></p></div>
+      <div class="cells-row plus"><div class="cells-label"><span class="sign">+</span>Cyber-JEV</div><div class="cells" data-found="306" data-missed="16" aria-hidden="true"></div><p class="cells-count"><strong>16</strong> <span data-i18n="missedWord">missed</span></p></div>
+      <div class="legend"><span class="key key-found" data-i18n="foundKey">Found</span><span class="key key-missed" data-i18n="missedKey">Missed</span></div>
+    </div>
+    <div class="stack-gap">
+      <div class="hunk"><span class="at">@@</span> <span data-i18n="budgetHunk">Same 4,031 alerts</span> <span class="at">@@</span></div>
+      <div class="diff-panel two">
+        <div class="dgroup"><h3 class="dgroup-title"><span data-i18n="foundTitle">Vulnerable functions found</span><em>+23</em></h3><div class="drow minus"><span class="sign">−</span><span class="val">283</span><span class="who">Jev 1.13</span></div><div class="drow plus"><span class="sign">+</span><span class="val">306</span><span class="who">Cyber-JEV</span></div></div>
+        <div class="dgroup"><h3 class="dgroup-title"><span data-i18n="falseAlarms">False alarms</span><em>−23</em></h3><div class="drow minus"><span class="sign">−</span><span class="val">3,748</span><span class="who">Jev 1.13</span></div><div class="drow plus"><span class="sign">+</span><span class="val">3,725</span><span class="who">Cyber-JEV</span></div></div>
+      </div>
+    </div>
+    <p class="comment" data-i18n="budgetNote">The 4,031-alert budget is the number of functions Jev 1.13 flags at its default threshold. Cyber-JEV still misses 16 vulnerable functions.</p>
+  </section>
+
+  <section class="chapter" aria-labelledby="patch-title">
+    <h2 class="chapter-title" id="patch-title"><span class="chapter-no">3</span><span data-i18n="tabPatches">Patch sensitivity</span></h2>
+    <p class="chapter-intro" data-i18n="r3Text">The share of vulnerable–patched pairs in which the vulnerable version receives the higher score. Ties count as half. The shaded length of each row shows the percentage.</p>
+    <p class="legend patch-legend"><span class="sign-key k-minus"><b>−</b><span data-i18n="referenceOnly">Reference data only</span></span><span class="sign-key k-plus"><b>+</b>Cyber-JEV</span><span class="sign-key k-alt"><b>•</b><span data-i18n="patchedOnly">Patched-only groups (3 models)</span></span></p>
+    <div class="diff-panel">
+      <div class="dgroup"><h3 class="dgroup-title"><span>T271 <span class="set-sub" data-i18n="setMain">main benchmark</span></span><em>+14.8 <span data-i18n="pts">pts</span></em></h3><div class="drow fill minus" style="--v:32.8%"><span class="sign">−</span><span class="val">32.8%</span></div><div class="drow fill plus" style="--v:47.6%"><span class="sign">+</span><span class="val">47.6%</span></div><div class="drow fill alt" style="--v:55.7%"><span class="sign">•</span><span class="val">55.7%</span></div></div>
+      <div class="dgroup"><h3 class="dgroup-title"><span>A72 <span class="set-sub">TitanVul</span></span><em>+29.2 <span data-i18n="pts">pts</span></em></h3><div class="drow fill minus" style="--v:33.3%"><span class="sign">−</span><span class="val">33.3%</span></div><div class="drow fill plus" style="--v:62.5%"><span class="sign">+</span><span class="val">62.5%</span></div><div class="drow fill alt" style="--v:80.6%"><span class="sign">•</span><span class="val">80.6%</span></div></div>
+      <div class="dgroup"><h3 class="dgroup-title"><span>P309 <span class="set-sub">TitanVul</span></span><em>+14.9 <span data-i18n="pts">pts</span></em></h3><div class="drow fill minus" style="--v:37.5%"><span class="sign">−</span><span class="val">37.5%</span></div><div class="drow fill plus" style="--v:52.4%"><span class="sign">+</span><span class="val">52.4%</span></div><div class="drow fill alt" style="--v:63.1%"><span class="sign">•</span><span class="val">63.1%</span></div></div>
+    </div>
+    <p class="comment" data-i18n="patchNote">A72 and P309 are external TitanVul suites. Training on patched-only groups scores higher on these pair tests, illustrating the trade-off between global ranking and patch sensitivity.</p>
+  </section>
+
+  <p class="doc-comment" data-i18n="evidenceNote">Evaluation separates protected splits from training by project, CVE, fix commit and code similarity. The manuscript reports project-cluster bootstrap intervals and patch-pair tests. Dataset labels and commit-derived supervision retain their original limitations.</p>
+
+  <section class="scope-section"><div><p class="eyebrow" data-i18n="scopeEyebrow">A role in the review workflow</p><h2 class="section-title" data-i18n="scopeTitle">A first pass.<br>A human decision.</h2></div><div class="scope-body"><p class="lead" data-i18n="scopeText">The intended use is to rank changed functions before deeper review with static analysis, rules or a security reviewer.</p><p data-i18n="scopeNote">The work evaluates historical functions and fixes. Live pull-request deployment, new vulnerability discovery and comparative throughput have not been demonstrated. A score prioritizes attention; it does not establish that code is safe.</p></div></section>
+  <a class="next-file" href="paper.html"><span class="next-label" data-i18n="nextPaper">Next: read the paper</span><span class="next-name">paper<i aria-hidden="true">→</i></span></a>
+  </div>
+</main>
+<footer class="footer"><div class="wrap footer-inner"><div><a class="footer-brand" href="./">Cyber-JEV<span>.</span></a><p data-i18n="availability">Research code, model weights and datasets are not distributed with this project page.</p></div><div class="footer-right"><a href="https://github.com/RicardoZ-kisara/cyber-jev" target="_blank" rel="noopener" data-i18n="pageRepo">Project-page repository ↗</a><p>© 2026 Cyber-JEV authors. <span data-i18n="rights">All rights reserved.</span></p></div></div></footer>
+</body>
+</html>

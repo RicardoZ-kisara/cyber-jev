@@ -12,16 +12,16 @@
   <link rel="canonical" href="https://ricardoz-kisara.github.io/cyber-jev/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b1618'/%3E%3Crect x='7' y='10' width='12' height='3' rx='1.5' fill='%23ec6a43'/%3E%3Crect x='7' y='19' width='18' height='3' rx='1.5' fill='%2350c897'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
-  <title>Cyber-JEV · Source-code vulnerability triage</title>
+  <title data-i18n="titleHome">Cyber-JEV · Source-code vulnerability triage</title>
   <script src="script.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 <header class="header">
   <div class="header-inner">
-    <a class="wordmark" href="#" aria-label="Cyber-JEV home"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8"/><rect class="bm-del" x="8" y="10" width="11" height="3" rx="1.5"/><rect class="bm-add" x="8" y="19" width="16" height="3" rx="1.5"/></svg>Cyber-JEV</a>
+    <a class="wordmark" href="./" aria-label="Cyber-JEV home"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8"/><rect class="bm-del" x="8" y="10" width="11" height="3" rx="1.5"/><rect class="bm-add" x="8" y="19" width="16" height="3" rx="1.5"/></svg>Cyber-JEV</a>
     <nav aria-label="Main navigation">
-      <a href="#method" data-i18n="navMethod">Method</a><a href="#results" data-i18n="navResults">Results</a><a href="#paper" data-i18n="navPaper">Paper</a>
+      <a href="method.html" data-i18n="navMethod">Method</a><a href="results.html" data-i18n="navResults">Results</a><a href="paper.html" data-i18n="navPaper">Paper</a>
     </nav>
     <button class="language" id="language" type="button" aria-label="Switch to Chinese"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="language-label">中文</span></button>
   </div>
@@ -34,74 +34,65 @@
         <h1 id="hero-title">Cyber-JEV<span class="title-dot">.</span></h1>
         <p class="hero-subtitle" data-i18n="heroSubtitle">Learn from the <em>fix</em>.<br>Focus the review.</p>
         <p class="hero-description" data-i18n="heroDescription">Matched contrastive fine-tuning of language models for fast source-code vulnerability triage.</p>
-        <div class="hero-actions"><a class="button primary" href="assets/cyber-jev-paper.pdf" target="_blank" rel="noopener"><span data-i18n="readPaper">Read the paper</span> <span aria-hidden="true">↗</span></a><a class="text-link" href="#method"><span data-i18n="exploreMethod">Explore the method</span> <span aria-hidden="true">↓</span></a></div>
-        <p class="manuscript-label" data-i18n="manuscriptLabel">Research manuscript · October 2026</p>
+        <div class="hero-actions"><a class="button primary" href="assets/cyber-jev-paper.pdf" target="_blank" rel="noopener"><span data-i18n="readPaper">Read the paper</span> <span aria-hidden="true">↗</span></a><a class="text-link" href="results.html"><span data-i18n="seeResults">See the results</span> <span aria-hidden="true">→</span></a></div>
       </div>
-      <div class="hero-visual" aria-label="Conceptual diagram: learn from a matched fix group, then score individual functions for review">
-        <div class="visual-heading"><span class="tiny-label" data-i18n="visualTitle">A SMALL CHANGE. A USEFUL SIGNAL.</span><span class="visual-no">FIG. 01</span></div>
+      <figure class="hero-visual" aria-label="Conceptual diagram: learn from a matched fix group, then score individual functions for review">
+        <p class="visual-title" data-i18n="visualTitle">A small change. A useful signal.</p>
         <div class="code-window">
           <div class="window-heading"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="fixCommit">A security fix</span><span class="window-tag">C / C++</span></div>
           <div class="diff" aria-hidden="true">
             <div class="dl"><span class="ln">10</span><span class="sg"></span><code><b class="k">int</b> <b class="f">read_rec</b>(buf_t *b, <b class="k">char</b> *out, <b class="k">size_t</b> n) {</code></div>
             <div class="dl"><span class="ln">11</span><span class="sg"></span><code>  <b class="k">size_t</b> len = b-&gt;len;</code></div>
             <div class="dl del"><span class="ln">12</span><span class="sg">−</span><code>  <b class="f">memcpy</b>(out, b-&gt;data, len);</code></div>
-            <div class="dl add"><span class="ln">12</span><span class="sg">+</span><code>  <b class="k">if</b> (len &gt; n) <b class="k">return</b> -EINVAL;</code><span class="diff-tag" data-i18n="patchLabel">patch</span></div>
+            <div class="dl add"><span class="ln">12</span><span class="sg">+</span><code>  <b class="k">if</b> (len &gt; n) <b class="k">return</b> -EINVAL;</code></div>
             <div class="dl add"><span class="ln">13</span><span class="sg">+</span><code>  <b class="f">memcpy</b>(out, b-&gt;data, len);</code></div>
             <div class="dl"><span class="ln">14</span><span class="sg"></span><code>  <b class="k">return</b> <b class="n">0</b>;</code></div>
             <div class="dl"><span class="ln">15</span><span class="sg"></span><code>}</code></div>
           </div>
         </div>
-        <div class="connector"><span class="connector-line"></span><span class="connector-label" data-i18n="matchedComparison">Matched comparison</span><span class="connector-line"></span></div>
         <div class="pair">
           <div class="pair-item vulnerable"><span class="pair-symbol">−</span><div class="pair-text"><small data-i18n="beforeFix">Before the fix</small><strong data-i18n="vulnerable">Vulnerable</strong><span class="meter" aria-hidden="true"><i></i></span></div></div>
           <div class="pair-item patched"><span class="pair-symbol">+</span><div class="pair-text"><small data-i18n="afterFix">After the fix</small><strong data-i18n="patched">Patched</strong><span class="meter" aria-hidden="true"><i></i></span></div></div>
         </div>
-        <div class="visual-output"><span class="output-icon" aria-hidden="true">↗</span><div><strong data-i18n="learnRank">Learn to rank the vulnerable version higher.</strong><p data-i18n="singleInput">At inference: one function → one score.</p></div></div>
-        <div class="visual-footer"><span data-i18n="conceptual">Conceptual illustration</span><span aria-hidden="true">01 — 03</span></div>
-      </div>
+        <figcaption class="visual-output"><strong data-i18n="learnRank">Learn to rank the vulnerable version higher.</strong> <span data-i18n="singleInput">At inference: one function → one score.</span></figcaption>
+      </figure>
     </section>
-    <div class="authors wrap"><p>Zhuyi Zhao<span class="star">*</span>, Shengjie Yuan<span class="star">*</span>, Shengyu Wang, Kang Wei,<br class="author-break"> Wang Yang, Wenchao Xu, Fushuo Huo</p><span data-i18n="equalContribution">* Equal contribution</span></div>
+    <div class="authors wrap"><p>Zhuyi Zhao<span class="star">*</span>, Shengjie Yuan<span class="star">*</span>, Shengyu Wang, Kang Wei, Wang Yang, Wenchao Xu, Fushuo Huo</p><span data-i18n="equalContribution">* Equal contribution</span></div>
   </div>
-  <section class="metrics wrap" aria-label="Reported benchmark highlights">
-    <div class="metric"><p class="metric-number">0.814</p><h2 data-i18n="metric1">Test AUROC</h2><p data-i18n="metric1Note">Five-model ensemble · Jev 1.13: 0.743</p></div>
-    <div class="metric"><p class="metric-number">39<span class="metric-arrow">→</span><span class="metric-good">16</span></p><h2 data-i18n="metric2">Missed vulnerabilities</h2><p data-i18n="metric2Note">Jev → Cyber-JEV · same 4,031-alert budget</p></div>
-    <div class="metric"><p class="metric-number">7,270</p><h2 data-i18n="metric3">Functions evaluated</h2><p data-i18n="metric3Note">57 projects · 322 vulnerable functions</p></div>
+  <section class="home-diff wrap" aria-label="Reported benchmark highlights">
+    <div class="hunk"><span class="at">@@</span> <span data-i18n="hunkBench">Offline evaluation · C/C++ functions</span> <span class="at">@@</span></div>
+    <div class="diff-panel">
+      <div class="dgroup"><h2 class="dgroup-title" data-i18n="metric1">Test AUROC</h2>
+        <div class="drow minus"><span class="sign">−</span><span class="val">0.743</span><span class="who">Jev 1.13</span></div>
+        <div class="drow plus"><span class="sign">+</span><span class="val">0.814</span><span class="who">Cyber-JEV</span></div>
+        <p class="dnote" data-i18n="metric1Note">Five-model ensemble.</p></div>
+      <div class="dgroup"><h2 class="dgroup-title" data-i18n="metric2">Missed vulnerabilities</h2>
+        <div class="drow minus"><span class="sign">−</span><span class="val">39</span><span class="who">Jev 1.13</span></div>
+        <div class="drow plus"><span class="sign">+</span><span class="val">16</span><span class="who">Cyber-JEV</span></div>
+        <p class="dnote" data-i18n="metric2Note">Same budget: 4,031 alerts each.</p></div>
+      <div class="dgroup"><h2 class="dgroup-title" data-i18n="metric3">Functions evaluated</h2>
+        <div class="drow ctx"><span class="sign">·</span><span class="val">7,270</span><span class="who" data-i18n="ctxFunctions">test functions</span></div>
+        <div class="drow ctx"><span class="sign">·</span><span class="val">322</span><span class="who" data-i18n="ctxVulnerable">vulnerable functions</span></div>
+        <p class="dnote" data-i18n="metric3Note">From 57 projects.</p></div>
+    </div>
   </section>
   <section class="problem wrap section" aria-labelledby="problem-title">
-    <div><p class="eyebrow" data-i18n="problemEyebrow">01 / The research question</p><h2 class="section-title" id="problem-title" data-i18n="problemTitle">Can a model learn the defect,<br>not just the project?</h2></div>
-    <div class="problem-body"><p class="lead" data-i18n="problemLead">Security archives contain many vulnerable functions, but few matched examples of what changed when the defect was fixed.</p><div class="research-point"><span>01</span><div><h3 data-i18n="sourceTitle">The source shortcut</h3><p data-i18n="sourceText">When a data source contributes only vulnerable examples, its formatting and naming conventions can become a shortcut for the label.</p></div></div><div class="research-point"><span>02</span><div><h3 data-i18n="patchTitle">The patch sensitivity gap</h3><p data-i18n="patchText">A model can rank functions well overall while assigning a higher risk score to a repaired function than to its vulnerable original.</p></div></div></div>
+    <div><p class="eyebrow" data-i18n="problemEyebrow">The research question</p><h2 class="section-title" id="problem-title" data-i18n="problemTitle">Can a model learn the defect,<br>not just the project?</h2><p class="lead" data-i18n="problemLead">Security archives contain many vulnerable functions, but few matched examples of what changed when the defect was fixed.</p></div>
+    <ol class="findings">
+      <li><span class="flag" aria-hidden="true">!</span><div><h3 data-i18n="sourceTitle">The source shortcut</h3><p data-i18n="sourceText">When a data source contributes only vulnerable examples, its formatting and naming conventions can become a shortcut for the label.</p></div></li>
+      <li><span class="flag" aria-hidden="true">!</span><div><h3 data-i18n="patchTitle">The patch sensitivity gap</h3><p data-i18n="patchText">A model can rank functions well overall while assigning a higher risk score to a repaired function than to its vulnerable original.</p></div></li>
+    </ol>
   </section>
-  <section class="method-section" id="method" aria-labelledby="method-title">
-    <div class="wrap section"><div class="section-heading"><div><p class="eyebrow" data-i18n="methodEyebrow">02 / The approach</p><h2 class="section-title" id="method-title" data-i18n="methodTitle">Compare locally.<br>Score individually.</h2></div><p class="heading-note" data-i18n="methodIntro">Fix commits supply the comparison. Reference data anchor the classification task. Both update one shared model.</p></div>
-    <div class="pipeline">
-      <article class="pipeline-step"><div class="step-top"><span class="step-number">01</span><span class="tiny-label">PMC</span></div><h3 data-i18n="step1Title">Build matched groups</h3><p data-i18n="step1Text">Reconstruct the vulnerable function, its patched version, and up to two unchanged functions from the same file.</p><div class="group-diagram" aria-hidden="true"><span class="group-v" data-i18n="vulnerable">Vulnerable</span><span class="group-p" data-i18n="patched">Patched</span><span class="group-c" data-i18n="context">Same-file context × 2</span></div><div class="step-bottom" data-i18n="step1Bottom">2,829 groups · verified file snapshots</div></article>
-      <article class="pipeline-step"><div class="step-top"><span class="step-number">02</span><span class="tiny-label">HYB</span></div><h3 data-i18n="step2Title">Train two linked tasks</h3><p data-i18n="step2Text">Classify functions from the reference pool. Rank the vulnerable member above the other members of each matched group.</p><div class="loss-diagram" aria-hidden="true"><span data-i18n="classification">Classification</span><b>+</b><span data-i18n="groupRanking">Group ranking</span></div><div class="step-bottom" data-i18n="step2Bottom">One shared Qwen3.5-4B backbone</div></article>
-      <article class="pipeline-step"><div class="step-top"><span class="step-number">03</span><span class="tiny-label" data-i18n="inference">INFERENCE</span></div><h3 data-i18n="step3Title">Prioritize review</h3><p data-i18n="step3Text">Score one function at a time, then sort and select functions within a review budget for deeper analysis.</p><div class="rank-diagram" aria-hidden="true"><i style="--bar:87%"></i><i style="--bar:62%"></i><i style="--bar:36%"></i></div><div class="step-bottom" data-i18n="step3Bottom">One forward pass per model and function</div></article>
-    </div>
-    <p class="method-footnote" data-i18n="methodNote">Patched and unchanged functions provide weak supervision, not independently verified benign labels. External groups contribute to ranking only; the classification term uses the reference pool.</p></div>
+  <section class="tree-section wrap" aria-labelledby="explore-title">
+    <h2 class="section-title" id="explore-title" data-i18n="exploreTitle">Explore the research</h2>
+    <nav class="tree" aria-labelledby="explore-title">
+      <p class="tree-root" aria-hidden="true">cyber-jev/</p>
+      <a class="tree-row" href="method.html"><span class="branch" aria-hidden="true">├─</span><span class="tree-name">method</span><span class="tree-desc" data-i18n="exploreMethod">How fix commits and reference data train one shared model.</span><span class="tree-go" aria-hidden="true">→</span></a>
+      <a class="tree-row" href="results.html"><span class="branch" aria-hidden="true">├─</span><span class="tree-name">results</span><span class="tree-desc" data-i18n="exploreResults">Overall ranking, a fixed review budget and patch sensitivity.</span><span class="tree-go" aria-hidden="true">→</span></a>
+      <a class="tree-row" href="paper.html"><span class="branch" aria-hidden="true">└─</span><span class="tree-name">paper</span><span class="tree-desc" data-i18n="explorePaper">The full manuscript, with protocol, baselines and limitations.</span><span class="tree-go" aria-hidden="true">→</span></a>
+    </nav>
   </section>
-  <section class="wrap section results" id="results" aria-labelledby="results-title">
-    <div class="section-heading"><div><p class="eyebrow" data-i18n="resultsEyebrow">03 / The evidence</p><h2 class="section-title" id="results-title" data-i18n="resultsTitle">Measured in review decisions.</h2></div><p class="heading-note" data-i18n="resultsIntro">Offline evaluation on C/C++ functions. Reported Cyber-JEV results use the five-model ensemble unless stated otherwise.</p></div>
-    <div class="tabs" role="tablist" aria-label="Evaluation views"><button id="tab-ranking" role="tab" aria-selected="true" aria-controls="panel-ranking" data-panel="ranking" data-i18n="tabRanking">Overall ranking</button><button id="tab-budget" role="tab" aria-selected="false" aria-controls="panel-budget" tabindex="-1" data-panel="budget" data-i18n="tabBudget">Fixed review budget</button><button id="tab-patches" role="tab" aria-selected="false" aria-controls="panel-patches" tabindex="-1" data-panel="patches" data-i18n="tabPatches">Patch sensitivity</button></div>
-    <div id="panel-ranking" class="result-panel" role="tabpanel" aria-labelledby="tab-ranking" tabindex="0"><div class="table-card"><div class="table-scroll"><table><caption data-i18n="rankingCaption">Main test benchmark · 7,270 functions</caption><thead><tr><th scope="col" data-i18n="system">System</th><th scope="col">AUROC ↑</th><th scope="col" data-i18n="ap">Average precision ↑</th><th scope="col" data-i18n="lengthAuc">Length-stratified AUROC ↑</th></tr></thead><tbody><tr><th scope="row">Jev 1.13</th><td>0.743</td><td>0.101</td><td>0.706</td></tr><tr class="featured"><th scope="row">Cyber-JEV <span class="row-tag" data-i18n="ensemble">5 models</span></th><td>0.814</td><td>0.197</td><td>0.768</td></tr></tbody></table></div></div><p class="result-note" data-i18n="rankingNote">Reference-only fine-tuning reaches 0.804 AUROC. The small aggregate difference from Cyber-JEV is not evidence of a conclusive AUROC advantage over that baseline; patch-pair behavior provides a separate comparison. These are results for the reported benchmark, not a universal ranking of tools.</p></div>
-    <div id="panel-budget" class="result-panel" role="tabpanel" aria-labelledby="tab-budget" tabindex="0" hidden><div class="table-card"><div class="table-scroll"><table><caption data-i18n="budgetCaption">Same 4,031-alert review budget · 322 vulnerable functions</caption><thead><tr><th scope="col" data-i18n="system">System</th><th scope="col" data-i18n="detected">Detected ↑</th><th scope="col" data-i18n="missed">Missed ↓</th><th scope="col" data-i18n="falseAlarms">False alarms ↓</th></tr></thead><tbody><tr><th scope="row">Jev 1.13</th><td>283</td><td>39</td><td>3,748</td></tr><tr class="featured"><th scope="row">Cyber-JEV</th><td>306</td><td>16</td><td>3,725</td></tr></tbody></table></div></div><p class="result-note" data-i18n="budgetNote">The alert count matches Jev 1.13 at its default threshold. Both systems flag exactly 4,031 functions. Cyber-JEV finds 23 more vulnerable functions at this operating point; it still misses 16.</p></div>
-    <div id="panel-patches" class="result-panel" role="tabpanel" aria-labelledby="tab-patches" tabindex="0" hidden><div class="table-card"><div class="table-scroll"><table class="bars"><caption data-i18n="patchCaption">Vulnerable–patched pair ranking · ties receive half credit</caption><thead><tr><th scope="col" data-i18n="training">Training variant</th><th scope="col">T271 ↑</th><th scope="col">A72 ↑</th><th scope="col">P309 ↑</th></tr></thead><tbody><tr><th scope="row" data-i18n="referenceOnly">Reference data only</th><td style="--v:32.8%">32.8%</td><td style="--v:33.3%">33.3%</td><td style="--v:37.5%">37.5%</td></tr><tr class="featured"><th scope="row">Cyber-JEV</th><td style="--v:47.6%">47.6%</td><td style="--v:62.5%">62.5%</td><td style="--v:52.4%">52.4%</td></tr><tr><th scope="row" data-i18n="patchedOnly">Patched-only groups (3 models)</th><td style="--v:55.7%">55.7%</td><td style="--v:80.6%">80.6%</td><td style="--v:63.1%">63.1%</td></tr></tbody></table></div></div><p class="result-note" data-i18n="patchNote">T271 comes from the main benchmark; A72 and P309 are external TitanVul suites. Full Cyber-JEV improves by 14.8, 29.2 and 14.9 percentage points over reference-only training. Patched-only groups score higher on these pair tests, illustrating the trade-off between global ranking and patch sensitivity.</p></div>
-    <div class="evidence-note"><span class="note-icon" aria-hidden="true">↳</span><p data-i18n="evidenceNote">Evaluation separates protected splits from training by project, CVE, fix commit and code similarity. The manuscript reports project-cluster bootstrap intervals and patch-pair tests. Dataset labels and commit-derived supervision retain their original limitations.</p></div>
-  </section>
-  <section class="scope-section wrap"><div><p class="eyebrow" data-i18n="scopeEyebrow">A role in the review workflow</p><h2 class="section-title" data-i18n="scopeTitle">A first pass.<br>A human decision.</h2></div><div class="scope-body"><p class="lead" data-i18n="scopeText">The intended use is to rank changed functions before deeper review with static analysis, rules or a security reviewer.</p><p data-i18n="scopeNote">The work evaluates historical functions and fixes. Live pull-request deployment, new vulnerability discovery and comparative throughput have not been demonstrated. A score prioritizes attention; it does not establish that code is safe.</p></div></section>
-  <section class="paper-section" id="paper" aria-labelledby="paper-title"><div class="wrap paper-inner"><div><p class="eyebrow" data-i18n="paperEyebrow">04 / Read the research</p><h2 id="paper-title" data-i18n="paperTitle">The method.<br>The results.<br>The full context.</h2><a class="button primary" href="assets/cyber-jev-paper.pdf" target="_blank" rel="noopener"><span data-i18n="downloadPaper">Open manuscript PDF</span><span aria-hidden="true">↗</span></a><p class="paper-meta" data-i18n="paperMeta">8 pages · English · October 2026 manuscript</p></div><div class="citation-card"><div class="citation-header"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="citation-title" data-i18n="citationTitle">Cite this manuscript</span><button id="copy-citation" type="button" data-i18n="copy">Copy BibTeX</button></div><pre id="citation-text">@misc{zhao2026cyberjev,
-  title = {Cyber-JEV: Matched Contrastive
-    Fine-Tuning of Language Models for Fast
-    Source-Code Vulnerability Triage},
-  author = {Zhao, Zhuyi and Yuan, Shengjie
-    and Wang, Shengyu and Wei, Kang
-    and Yang, Wang and Xu, Wenchao
-    and Huo, Fushuo},
-  year = {2026},
-  note = {Research manuscript},
-  url = {https://ricardoz-kisara.github.io/cyber-jev/}
-}</pre><a href="citation.bib" download data-i18n="downloadBib">Download .bib file ↓</a><span id="copy-status" class="sr-only" role="status" aria-live="polite"></span></div></div></section>
 </main>
-<footer class="footer"><div class="wrap footer-inner"><div><a class="footer-brand" href="#">Cyber-JEV<span>.</span></a><p data-i18n="availability">Research code, model weights and datasets are not distributed with this project page.</p></div><div class="footer-right"><a href="https://github.com/RicardoZ-kisara/cyber-jev" target="_blank" rel="noopener" data-i18n="pageRepo">Project-page repository ↗</a><p>© 2026 Cyber-JEV authors. <span data-i18n="rights">All rights reserved.</span></p></div></div></footer>
+<footer class="footer"><div class="wrap footer-inner"><div><a class="footer-brand" href="./">Cyber-JEV<span>.</span></a><p data-i18n="availability">Research code, model weights and datasets are not distributed with this project page.</p></div><div class="footer-right"><a href="https://github.com/RicardoZ-kisara/cyber-jev" target="_blank" rel="noopener" data-i18n="pageRepo">Project-page repository ↗</a><p>© 2026 Cyber-JEV authors. <span data-i18n="rights">All rights reserved.</span></p></div></div></footer>
 </body>
 </html>
