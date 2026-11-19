@@ -12,7 +12,7 @@ The research implementation, training code, model weights, datasets and private 
 
 ## Publication status and evidence
 
-The PDF is the eight-page research manuscript as revised in November 2026, after peer review. It replaces the October 2026 version and carries a new title. It is described as a manuscript, without asserting publication, conference acceptance or an arXiv identifier. Results concern offline historical benchmarks; a production deployment or discovery of new vulnerabilities is not claimed. Please consult the manuscript for the evaluation protocol, baselines and limitations.
+The PDF is the eight-page research manuscript as revised in November 2026, after peer review. It replaces the October 2026 version under the same title. It is described as a manuscript, without asserting publication, conference acceptance or an arXiv identifier. Results concern offline historical benchmarks; a production deployment or discovery of new vulnerabilities is not claimed. Please consult the manuscript for the evaluation protocol, baselines and limitations.
 
 ## Website
 
